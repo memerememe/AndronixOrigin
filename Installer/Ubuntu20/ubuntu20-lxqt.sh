@@ -1,5 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
-pkg install wget -y 
+#!/bin/bash
 folder=ubuntu20-fs
 cur=`pwd`
 dlink="https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/APT"
@@ -32,7 +31,7 @@ fi
 	mkdir -p "$folder"
 	cd "$folder"
 	echo "Decompressing Rootfs, please be patient."
-	proot --link2symlink tar -xf ${cur}/${tarball} --exclude=dev||:
+	proot tar -xf ${cur}/${tarball} --exclude=dev||:
 	cd "$cur"
 fi
 
@@ -183,8 +182,6 @@ cd \$(dirname \$0)
 ## unset LD_PRELOAD in case termux-exec is installed
 unset LD_PRELOAD
 command="proot"
-command+=" --kill-on-exit"
-command+=" --link2symlink"
 command+=" -0"
 command+=" -r $folder"
 if [ -n "\$(ls -A ubuntu20-binds)" ]; then
@@ -241,8 +238,7 @@ chmod +x ubuntu20-fs/usr/local/bin/vncpasswd
 chmod +x ubuntu20-fs/usr/local/bin/vncserver-start
 chmod +x ubuntu20-fs/usr/local/bin/vncserver-stop
 
-echo "fixing shebang of $bin"
-termux-fix-shebang $bin
+
 echo "making $bin executable"
 chmod +x $bin
 echo "removing image for some space"
