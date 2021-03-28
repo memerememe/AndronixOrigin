@@ -22,7 +22,7 @@ if [ "$first" != 1 ];then
 	mkdir -p "$folder"
 	cd "$folder"
 	echo "Decompressing Rootfs, please be patient."
-	proot --link2symlink tar -xf ${cur}/${tarball}||:
+	proot tar -xf ${cur}/${tarball}||:
 	cd "$cur"
 fi
 mkdir -p arch-binds
@@ -35,7 +35,6 @@ cd \$(dirname \$0)
 ## unset LD_PRELOAD in case termux-exec is installed
 unset LD_PRELOAD
 command="proot"
-command+=" --link2symlink"
 command+=" -0"
 command+=" -r $folder"
 if [ -n "\$(ls -A arch-binds)" ]; then
