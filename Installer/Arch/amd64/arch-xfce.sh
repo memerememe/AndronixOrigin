@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 folder=arch-fs
 if [ -d "$folder" ]; then
 	first=1
@@ -16,13 +16,13 @@ if [ "$first" != 1 ];then
 		*)
 			echo "unknown architecture"; exit 1 ;;
 		esac
-		wget "http://mirrors.evowise.com/archlinux/iso/2019.07.01/archlinux-bootstrap-2019.07.01-{archurl}.tar.gz" -O $tarball
+		wget "http://mirrors.evowise.com/archlinux/iso/2021.03.01/archlinux-bootstrap-2021.03.01-{archurl}.tar.gz" -O $tarball
 	fi
 	cur=`pwd`
 	mkdir -p "$folder"
 	cd "$folder"
 	echo "Decompressing Rootfs, please be patient."
-	proot --link2symlink tar -xf ${cur}/${tarball}||:
+	proot tar -xf ${cur}/${tarball}||:
 	cd "$cur"
 fi
 mkdir -p arch-binds
@@ -35,7 +35,6 @@ cd \$(dirname \$0)
 ## unset LD_PRELOAD in case termux-exec is installed
 unset LD_PRELOAD
 command="proot"
-command+=" --link2symlink"
 command+=" -0"
 command+=" -r $folder"
 if [ -n "\$(ls -A arch-binds)" ]; then
