@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 folder=arch-fs
 if [ -d "$folder" ]; then
 	first=1
